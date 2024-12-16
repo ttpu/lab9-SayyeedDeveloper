@@ -9,6 +9,15 @@ len = . - msg
 _start:
     ldr r0, =1          @ file descriptor (stdout)
     ldr r1, =msg        @ message to write
+
+    mov r4, #20
+    mov r5, #20
+    cmp r4, r5
+    movlt r3, #48
+    movgt r3, #49
+    moveq r3, #50
+    strb r3, [r1]
+
     ldr r2, =len        @ message length
     mov r7, #4          @ sys_write system call
     svc 0               @ make the system call
